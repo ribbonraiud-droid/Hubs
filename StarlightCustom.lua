@@ -3516,6 +3516,7 @@ function Starlight:CreateWindow(WindowSettings)
 			Tab.Instances.Page.Holder.Center.Changelog.latest.desc.Text = TabSettings.Changelog[1].Description
 		end
 
+        print("NewVersion1")
         local AccountTab = Tab.Instances.Page.Holder.Right:GetChildren()
 
         for _, child in ipairs(AccountTab) do
