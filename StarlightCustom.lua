@@ -3521,7 +3521,7 @@ function Starlight:CreateWindow(WindowSettings)
 
         local textLabel = AccountTab:FindFirstChildOfClass("TextLabel")
         if textLabel then
-            textLabel.Text = '<font size="14" color="#FFF" weight="semibold">Players</font>\n'.."Your account is " .. Player.AccountAge .. " days old"
+            textLabel.Text = "Your account is " .. Player.AccountAge .. " days old"
         else
             warn("No TextLabel found in AccountTab")
         end
