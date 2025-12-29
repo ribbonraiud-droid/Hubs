@@ -3517,10 +3517,13 @@ function Starlight:CreateWindow(WindowSettings)
 		end
 
         print("NewVersion1")
-        local AccountTab = Tab.Instances.Page.Holder.Right.UIListLayout:GetChildren()
+        local AccountTab = Tab.Instances.Page.Holder.Right.Status
 
-        for _, child in ipairs(AccountTab) do
-            print(child.Name)
+        local textLabel = AccountTab:FindFirstChildOfClass("TextLabel")
+        if textLabel then
+            textLabel.Text = '<font size="14" color="#FFF" weight="semibold">Players</font>\n'.."Your account is " .. player.AccountAge .. " days old"
+        else
+            warn("No TextLabel found in AccountTab")
         end
 
 		checkFriends()
