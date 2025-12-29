@@ -3517,7 +3517,10 @@ function Starlight:CreateWindow(WindowSettings)
 		end
 
         local AccountTab = Tab.Instances.Page.Holder.Right:GetChildren()
-        print(AccountTab)
+
+        for _, child in ipairs(AccountTab) do
+            print(child.Name)
+        end
 
 		checkFriends()
 		Start = TimeFunction()
