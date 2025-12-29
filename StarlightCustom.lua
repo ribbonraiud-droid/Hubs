@@ -3517,7 +3517,7 @@ function Starlight:CreateWindow(WindowSettings)
 		end
 
         print("NewVersion1")
-        local AccountTab = Tab.Instances.Page.Holder.Right:GetChildren()
+        local AccountTab = Tab.Instances.Page.Holder.Right.UIListLayout:GetChildren()
 
         for _, child in ipairs(AccountTab) do
             print(child.Name)
