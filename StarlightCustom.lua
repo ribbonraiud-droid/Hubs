@@ -3378,8 +3378,6 @@ function Starlight:CreateWindow(WindowSettings)
 			end
 		end)
 
-        Tab.Instances.Page.Holder.Right.Account.Visible = false
-
 		table.insert(TabSettings.UnsupportedExecutors, "Roblox Studio")
 
 		Tab.Instances.Page.Holder.Center.Executor.Header.Text = executorname
@@ -3517,6 +3515,9 @@ function Starlight:CreateWindow(WindowSettings)
 			Tab.Instances.Page.Holder.Center.Changelog.latest.date.Text = TabSettings.Changelog[1].Date
 			Tab.Instances.Page.Holder.Center.Changelog.latest.desc.Text = TabSettings.Changelog[1].Description
 		end
+
+        local AccountTab = Tab.Instances.Page.Holder.Right:GetChildren()
+        print(AccountTab)
 
 		checkFriends()
 		Start = TimeFunction()
