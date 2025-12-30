@@ -1,6 +1,6 @@
 --// SECTION : Core Variables
 
-local Release = "Prerelease Beta 1.04"
+local Release = "Prerelease Beta 1.0"
 local debugV = false
 
 local Starlight = {
@@ -59,7 +59,6 @@ local CoreGui = GetService("CoreGui")
 local Player = Players.LocalPlayer
 local PlayerGui = Player:WaitForChild("PlayerGui")
 local Camera = workspace.CurrentCamera
-local Mouse = Player:GetMouse()
 local GuiInset, _ = GuiService:GetGuiInset()
 GuiInset = GuiInset.Y - 20
 local themeEvent = Instance.new("BindableEvent")
@@ -1727,6 +1726,73 @@ local function AddToolTip(InfoStr, HoverInstance)
 	local stroke = Instance.new("UIStroke")
 	stroke.Color = Color3.fromRGB(65, 66, 77)
 	stroke.Parent = tooltip
+
+	local hoverTime = 0
+	local IsHovering = false
+	local lastMousePos = nil
+	local threshold = 0.44
+
+	local function updateTooltipPos()
+	tooltip.Position = UDim2.fromOffset(Mouse.X + 15, Mouse.Y + 20)
+	end
+
+	if HoverInstance then
+		HoverInstance.MouseEnter:Connect(function()
+			IsHovering = true
+			lastMousePos = Vector2.new(Mouse.X, Mouse.Y)
+			hoverTime = 0
+		end)
+
+		HoverInstance.MouseLeave:Connect(function()
+			IsHovering = false
+			tooltip.Visible = false
+		end)
+
+		HoverInstance:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
+			local p, pos, size = Mouse, HoverInstance.AbsolutePosition, HoverInstance.AbsoluteSize
+			if not (p.X >= pos.X and p.X <= pos.X + size.X and p.Y >= pos.Y and p.Y <= pos.Y + size.Y) then
+				IsHovering = false
+				tooltip.Visible = false
+			else
+				IsHovering = true
+				lastMousePos = Vector2.new(Mouse.X, Mouse.Y)
+				hoverTime = 0
+			end
+		end)
+
+		RunService.RenderStepped:Connect(function(dt)
+			if not IsHovering then
+				return
+			end
+
+			local currentPos = Vector2.new(Mouse.X, Mouse.Y)
+			if (currentPos - lastMousePos).magnitude > 0 then
+				tooltip.Visible = false
+				hoverTime = 0
+				lastMousePos = currentPos
+			else
+				hoverTime += dt
+				if hoverTime >= threshold then
+					updateTooltipPos()
+					if not String.IsEmptyOrNull(label.Text) then
+						RunService.RenderStepped:Wait()
+						tooltip.Visible = true
+					end
+				end
+			end
+		end)
+	end
+
+	updateTooltipPos()
+	do -- Theme Binding
+		ThemeMethods.bindTheme(tooltip, "BackgroundColor3", "Backgrounds.Medium")
+		ThemeMethods.bindTheme(stroke, "Color", "Foregrounds.Dark")
+		ThemeMethods.bindTheme(label, "TextColor3", "Foregrounds.Light")
+	end
+	tooltip.ClipsDescendants = false
+	label.ClipsDescendants = false
+
+	return label
 end
 
 -- A Function to make an object movable via dragging another object
