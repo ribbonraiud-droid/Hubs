@@ -1,6 +1,6 @@
 --// SECTION : Core Variables
 
-local Release = "Prerelease Beta 1.01"
+local Release = "Prerelease Beta 1.02"
 local debugV = false
 
 local Starlight = {
@@ -1466,13 +1466,7 @@ local function Hide(Interface, JustHide: boolean?, Notify: boolean?, Bind: strin
 			0, 2, 0, 0
 		)
 	elseif not isStudio then
-		InputManager:SendMouseButtonEvent(
-			0, 0, 0, true, game, 0
-		)
 
-		InputManager:SendMouseButtonEvent(
-			0, 0, 0, false, game, 0
-		)
 	end
 
 
@@ -1985,7 +1979,7 @@ Starlight.Instance = StarlightUI
 StarlightUI.Enabled = false
 if not isStudio then
 	pcall(function()
-		StarlightUI.OnTopOfCoreBlur = true
+		StarlightUI.OnTopOfCoreBlur = false
 	end)
 end
 
@@ -3529,6 +3523,11 @@ function Starlight:CreateWindow(WindowSettings)
 		UserIdTextLabel.Name = "UserIDLabel"
 		UserIdTextLabel.Parent = Tab.Instances.Page.Holder.Right.Status
 		UserIdTextLabel.Text = "User ID: "..Player.UserId
+		UserIdTextLabel.Position = UDim2.new(0, 5, 0, 28)
+		UserIdTextLabel.Size = UDim2.new(0, 200, 0, 30)
+		UserIdTextLabel.BackgroundTransparency = 1
+		UserIdTextLabel.TextColor3 = Color3.fromRGB(165, 165, 165)
+		UserIdTextLabel.ZIndex = 6
 
 		checkFriends()
 		Start = TimeFunction()
