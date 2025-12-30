@@ -1,6 +1,6 @@
 --// SECTION : Core Variables
 
-local Release = "Prerelease Beta 1.02"
+local Release = "Prerelease Beta 1.03"
 local debugV = false
 
 local Starlight = {
@@ -3528,6 +3528,8 @@ function Starlight:CreateWindow(WindowSettings)
 		UserIdTextLabel.BackgroundTransparency = 1
 		UserIdTextLabel.TextColor3 = Color3.fromRGB(165, 165, 165)
 		UserIdTextLabel.ZIndex = 6
+		UserIdTextLabel.TextXAlignment = "Left"
+		UserIdTextLabel.TextYAlignment = "Bottom"
 
 		checkFriends()
 		Start = TimeFunction()
