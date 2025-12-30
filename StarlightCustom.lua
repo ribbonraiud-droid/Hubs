@@ -3519,7 +3519,7 @@ function Starlight:CreateWindow(WindowSettings)
         local AccountTab = Tab.Instances.Page.Holder.Right.Status
 
         local textLabel = AccountTab:FindFirstChildOfClass("TextLabel")
-        if textLabel and textLabel:Find("Coming Soon.") and textLabel.Name ~= "UserIDLabel" then
+        if textLabel and textLabel.Name == "Subheader" and textLabel.Name ~= "UserIDLabel" then
             textLabel.Text = "Your Account is " .. Player.AccountAge .. " days old"
         else
             warn("No TextLabel found in AccountTab")
