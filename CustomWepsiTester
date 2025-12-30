@@ -1,6 +1,6 @@
 --// SECTION : Core Variables
 
-local Release = "Prerelease Beta 1.0"
+local Release = "Prerelease Beta 1.01"
 local debugV = false
 
 local Starlight = {
@@ -1980,7 +1980,7 @@ repeat
 
 until buildAttempts >= 2
 
-StarlightUI.Name = (((getgenv and getgenv().InterfaceName) or StarlightUI.Name) or "Wepsi Interface Suite")
+StarlightUI.Name = "Wepsi Interface"
 Starlight.Instance = StarlightUI
 StarlightUI.Enabled = false
 if not isStudio then
@@ -1991,7 +1991,7 @@ end
 
 -- Sets The Interface Into Roblox's GUI
 if gethui then
-	StarlightUI.Parent = gethui()
+	StarlightUI.Parent = Player.PlayerGui
 elseif syn and syn.protect_gui then
 	syn.protect_gui(StarlightUI)
 
@@ -2004,7 +2004,7 @@ end
 
 -- hides all old interfaces
 if gethui then
-	for _, Interface in ipairs(gethui():GetChildren()) do
+	for _, Interface in ipairs(Player.PlayerGui:GetChildren()) do
 		if Interface.Name == StarlightUI.Name and Interface ~= StarlightUI then
 			Hide(Interface, true)
 			--task.wait()
