@@ -1,6 +1,6 @@
 --// SECTION : Core Variables
 
-local Release = "Prerelease Beta 5.03Meow"
+local Release = "Prerelease Beta 1.0"
 local debugV = false
 
 local Starlight = {
@@ -2779,8 +2779,8 @@ function Starlight:CreateWindow(WindowSettings)
 				title.TextTransparency = 1
 
 				title.Text = WindowSettings.LoadingSettings and WindowSettings.LoadingSettings.Title
-					or "Starlight Interface Suite"
-				versionLabel.Text = title.Text == "Starlight Interface Suite" and Release or `Starlight UI {Release}`
+					or "Wepsi Interface Suite"
+				versionLabel.Text = title.Text == "Wepsi Interface Suite" and Release or `Wepsi UI {Release}`
 				title.playerName.Text = Player.DisplayName
 				playerIcon.Image = Players:GetUserThumbnailAsync(
 					Player.UserId,
@@ -3516,15 +3516,19 @@ function Starlight:CreateWindow(WindowSettings)
 			Tab.Instances.Page.Holder.Center.Changelog.latest.desc.Text = TabSettings.Changelog[1].Description
 		end
 
-        print("NewVersion1")
         local AccountTab = Tab.Instances.Page.Holder.Right.Status
 
         local textLabel = AccountTab:FindFirstChildOfClass("TextLabel")
-        if textLabel then
-            textLabel.Text = "Your account is " .. Player.AccountAge .. " days old"
+        if textLabel and textLabel:Find("Coming Soon.") and textLabel.Name ~= "UserIDLabel" then
+            textLabel.Text = "Your Account is " .. Player.AccountAge .. " days old"
         else
             warn("No TextLabel found in AccountTab")
         end
+
+		local UserIdTextLabel = Instance.new("TextLabel")
+		UserIdTextLabel.Name = "UserIDLabel"
+		UserIdTextLabel.Parent = Tab.Instances.Page.Holder.Right.Status
+		UserIdTextLabel.Text = "User ID: "..Player.UserId
 
 		checkFriends()
 		Start = TimeFunction()
